@@ -1,20 +1,62 @@
-﻿// practical4.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
+﻿#include <iostream>
+#include<map>
+#include<set>
+#include<string>
+#include<stdio.h>
+using namespace std;
 
-#include <iostream>
-
-int main()
-{
-    std::cout << "Hello World!\n";
+int main() {
+	std::set<int>myset;
+	printf("Please enter a group of number.Enter 0 to exit: \n");
+	int number = 0;
+	while (true)
+	{
+		scanf("%d", &number);
+		if (number == 0)
+		{
+			break;
+		}
+		myset.insert(number);
+	}
+	printf("Please enter the number to find:\n");
+	scanf("%d", &number);
+	if (myset.count(number))
+		printf("%d In the group！\n", number);
+	else
+		printf("%d Not in the group！\n", number);
+	printf("Please enter the number you want to delete: \n");
+	int deleted;
+	scanf("%d", &deleted);
+	if (myset.count(deleted))
+	{
+		myset.erase(deleted);
+		printf("Deleted completed！\n");
+	}
+	else
+		printf("%d Not in the group！\n", number);
+	std::map<int, std::string>mymap;
+	for (auto it = myset.begin(); it != myset.end(); ++it) {
+		printf("Please %d match a string: ", *it);
+		std::string str;
+		str.resize(100);
+		scanf("%s", str.c_str());
+		mymap.insert(std::pair<int, std::string>(*it, str));
+	}
+	for (auto it = mymap.begin(); it != mymap.end(); ++it)
+	{
+		printf("%d %s\n", it->first, it->second.c_str());
+	}
+	printf("Please enter a string as the key:");
+	while (1)
+	{
+		scanf("%d", &number);
+		auto it = mymap.find(number);
+		if (it == mymap.end())
+			printf("Not exist！Please enter again\n");
+		else
+		{
+			printf("%s\n", it->second.c_str());
+			break;
+		}
+	}
 }
-
-// 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
-// 调试程序: F5 或调试 >“开始调试”菜单
-
-// 入门使用技巧: 
-//   1. 使用解决方案资源管理器窗口添加/管理文件
-//   2. 使用团队资源管理器窗口连接到源代码管理
-//   3. 使用输出窗口查看生成输出和其他消息
-//   4. 使用错误列表窗口查看错误
-//   5. 转到“项目”>“添加新项”以创建新的代码文件，或转到“项目”>“添加现有项”以将现有代码文件添加到项目
-//   6. 将来，若要再次打开此项目，请转到“文件”>“打开”>“项目”并选择 .sln 文件
